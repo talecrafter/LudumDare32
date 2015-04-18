@@ -6,6 +6,20 @@ using Random = UnityEngine.Random;
 
 public class SecondaryCharacter : Character
 {
+	public float fromY;
+	public float toY;
+
+	// ================================================================================
+	//  unity methods
+	// --------------------------------------------------------------------------------
+
+	protected override void Awake()
+	{
+		base.Awake();
+
+		SetDepth(Random.Range(fromY, toY));
+	}
+
 	protected override void Update()
 	{
 		if (outOfRightBorder)
@@ -18,6 +32,15 @@ public class SecondaryCharacter : Character
 		}
 
 		base.Update();
+	}
+
+	// ================================================================================
+	//  privat methods
+	// --------------------------------------------------------------------------------
+
+	private void SetDepth(float p)
+	{
+		_transform.position = new Vector3(_transform.position.x, p, _transform.position.z);
 	}
 
 	private void SetRandomSize()

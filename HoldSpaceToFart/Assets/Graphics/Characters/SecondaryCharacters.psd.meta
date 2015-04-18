@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a9df9d019c6411746b36f536f9512156
-timeCreated: 1429356636
+timeCreated: 1429381543
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -80,11 +80,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 913
-        y: 1173
-        width: 305
-        height: 738
+        y: 1152
+        width: 345
+        height: 759
       alignment: 9
-      pivot: {x: .536934853, y: .0512265265}
+      pivot: {x: .543465495, y: .0720053986}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: woman2
       rect:
@@ -99,32 +99,32 @@ TextureImporter:
     - name: woman3
       rect:
         serializedVersion: 2
-        x: 79
-        y: 246
-        width: 355
+        x: 27
+        y: 248
+        width: 312
         height: 854
       alignment: 9
-      pivot: {x: .449227512, y: .0831638649}
+      pivot: {x: .550324678, y: .0963548943}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: man1
       rect:
         serializedVersion: 2
-        x: 436
-        y: 226
-        width: 265
-        height: 859
+        x: 355
+        y: 233
+        width: 290
+        height: 861
       alignment: 9
-      pivot: {x: .517003953, y: .111818641}
+      pivot: {x: .501465917, y: .109201819}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: man2
       rect:
         serializedVersion: 2
-        x: 771
-        y: 230
-        width: 328
-        height: 859
+        x: 748
+        y: 199
+        width: 407
+        height: 901
       alignment: 9
-      pivot: {x: .376358211, y: .0803444684}
+      pivot: {x: .614392757, y: .0953479558}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

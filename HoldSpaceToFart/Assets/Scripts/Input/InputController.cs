@@ -36,5 +36,10 @@ public class InputController : MonoBehaviour
 		{
 			player.SetMovement(Direction.None);
 		}
+
+		if (Input.GetButton("Jump"))
+		{
+			player.InputFart();
+		}
 	}
 }

@@ -11,6 +11,9 @@ public class Game : BaseGameController
 	public static new Game Instance = null;
 
 	public AudioManager gameAudioManager;
+	public UIManager uiManager;
+
+	public PlayerCharacter playerCharacter;
 
 	void Awake()
 	{
@@ -23,6 +26,14 @@ public class Game : BaseGameController
 		Instance = this;
 
 		gameAudioManager = GetComponent<AudioManager>();
+		uiManager = FindObjectOfType<UIManager>();
+	}
+
+	protected override void LoadLevelData()
+	{
+		base.LoadLevelData();
+
+		playerCharacter = FindObjectOfType<PlayerCharacter>();
 	}
 
 	public float borderRight

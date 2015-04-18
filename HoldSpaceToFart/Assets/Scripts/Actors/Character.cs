@@ -20,6 +20,14 @@ public class Character : MonoBehaviour
 	private Animator _animator;
 	protected Transform _transform;
 
+	protected virtual float currentSpeed
+	{
+		get
+		{
+			return speed;
+		}
+	}
+
 	// ================================================================================
 	//  border
 	// --------------------------------------------------------------------------------
@@ -81,7 +89,7 @@ public class Character : MonoBehaviour
 
 			}
 
-			float change = speed;
+			float change = currentSpeed;
 
 			_transform.position += direction * change * Time.deltaTime;
 		}
