@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using CraftingLegends.Core;
 
 public class PlayerCharacter : Character
 {
@@ -16,6 +17,22 @@ public class PlayerCharacter : Character
 	Direction targetDirection = Direction.None;
 
 	public Transform cameraFocus;
+
+	public GameObject fartPrefab;
+
+	public Transform fartLocation;
+
+
+	public float fartProgress
+	{ 
+		get
+		{
+			if (!isFarting)
+				return 0;
+
+			return fartMass / maxFart;
+		}
+	}
 
 	protected override float rightBorder
 	{
@@ -111,7 +128,17 @@ public class PlayerCharacter : Character
 
 	private void Fart()
 	{
-		Game.Instance.screenShake.Shake(fartMass);
+		float fartPower = fartMass;
+
+		// screen shake
+		float shakePower = 1f + fartPower * .3f;
+		Game.Instance.screenShake.Shake(shakePower);
+
+		GameObject fartObject = GameObjectFactory.GameObject(fartPrefab, fartLocation.position);
+		Fart fart = fartObject.GetComponent<Fart>();
+		fart.TriggerFart(fartPower);
+
+		Destroy(fartObject, 3f);
 	}
 
 	public void SetMovement(Direction newDirection)
