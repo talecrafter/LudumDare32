@@ -1,0 +1,132 @@
+fileFormatVersion: 2
+guid: a9df9d019c6411746b36f536f9512156
+timeCreated: 1429356636
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: man0
+    21300002: woman0
+    21300004: woman1
+    21300006: woman2
+    21300008: woman3
+    21300010: man1
+    21300012: man2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: man0
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1118
+        width: 355
+        height: 859
+      alignment: 9
+      pivot: {x: .576158524, y: .0855901912}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: woman0
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 1139
+        width: 363
+        height: 850
+      alignment: 9
+      pivot: {x: .512413323, y: .0732503757}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: woman1
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 1173
+        width: 305
+        height: 738
+      alignment: 9
+      pivot: {x: .536934853, y: .0512265265}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: woman2
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 1173
+        width: 309
+        height: 738
+      alignment: 9
+      pivot: {x: .5, y: .0542794429}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: woman3
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 246
+        width: 355
+        height: 854
+      alignment: 9
+      pivot: {x: .449227512, y: .0831638649}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: man1
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 226
+        width: 265
+        height: 859
+      alignment: 9
+      pivot: {x: .517003953, y: .111818641}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: man2
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 230
+        width: 328
+        height: 859
+      alignment: 9
+      pivot: {x: .376358211, y: .0803444684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
