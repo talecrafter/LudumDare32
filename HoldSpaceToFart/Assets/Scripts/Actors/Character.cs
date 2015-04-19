@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
 	protected Direction lookDirection = Direction.Right;
 
 	[SerializeField]
-	private GameObject _displayObject;
+	protected GameObject _displayObject;
 
 	private Animator _animator;
 	protected Transform _transform;
@@ -64,6 +64,10 @@ public class Character : MonoBehaviour
 		}
 	}
 
+	// ================================================================================
+	//  unity methods
+	// --------------------------------------------------------------------------------
+
 	protected virtual void Awake()
 	{
 		_transform = transform;
@@ -77,6 +81,26 @@ public class Character : MonoBehaviour
 
 		HoldInBounds();
 	}
+
+	// ================================================================================
+	//  public methods
+	// --------------------------------------------------------------------------------
+
+	public void MoveAwayFromPos(Vector3 pos)
+	{
+		if (pos.x > _transform.position.x)
+		{
+			SetDirection(Direction.Left);
+		}
+		else
+		{
+			SetDirection(Direction.Right);
+		}
+	}
+
+	// ================================================================================
+	//  private methods
+	// --------------------------------------------------------------------------------
 
 	private void AutomaticMovement()
 	{
@@ -107,11 +131,7 @@ public class Character : MonoBehaviour
 		}
 	}
 
-	// ================================================================================
-	//  private methods
-	// --------------------------------------------------------------------------------
-
-	protected void SetDirection(Direction newDirection, bool hard = false)
+	protected void SetDirection(Direction newDirection)
 	{
 		if (newDirection != current)
 		{

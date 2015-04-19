@@ -15,7 +15,9 @@ public class RandomTalker : MonoBehaviour
 	public bool isTalking { get { return _fadingTimer != null; } }
 
 	public List<string> sentences;
+	public List<string> fartSensed;
 	public List<Color> colors;
+	public List<Color> angerColors;
 
     void Start()
 	{
@@ -75,9 +77,19 @@ public class RandomTalker : MonoBehaviour
 		}
 	}
 
-	public void Talk(string text)
+	public void Talk(string text, bool angered = false)
 	{
+		if (angered)
+			mesh.color = angerColors.PickRandom();
+		else
+			mesh.color = colors.PickRandom();
+
 		mesh.text = text;
 		_fadingTimer = new FadingTimer(0.5f, 4f, 0.5f);
+	}
+
+	public void SenseFart()
+	{
+		Talk(fartSensed.PickRandom(), true);
 	}
 }

@@ -17,7 +17,12 @@ public class SecondaryCharacter : Character
 	{
 		base.Awake();
 
+		SetRandomSize();
+		SetRandomSpeed();
+
 		SetDepth(Random.Range(fromY, toY));
+
+		Game.Instance.fartMachine.Add(this);
 	}
 
 	protected override void Update()
@@ -35,6 +40,16 @@ public class SecondaryCharacter : Character
 	}
 
 	// ================================================================================
+	//  public methods
+	// --------------------------------------------------------------------------------
+
+	public void SenseFart(Vector3 pos, float power)
+	{
+		GetComponent<RandomTalker>().SenseFart();
+		MoveAwayFromPos(pos);
+	}
+
+	// ================================================================================
 	//  privat methods
 	// --------------------------------------------------------------------------------
 
@@ -45,7 +60,7 @@ public class SecondaryCharacter : Character
 
 	private void SetRandomSize()
 	{
-		_transform.localScale *= Random.Range(0.85f, 1.15f);
+		_displayObject.transform.localScale *= Random.Range(0.95f, 1.05f);
 	}
 
 	private void SetRandomSpeed()

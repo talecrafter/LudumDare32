@@ -15,6 +15,8 @@ public class Game : BaseGameController
 
 	public PlayerCharacter playerCharacter;
 
+	public FartMachine fartMachine;
+
 	void Awake()
 	{
 		if (base.Init() == false)
@@ -27,6 +29,7 @@ public class Game : BaseGameController
 
 		gameAudioManager = GetComponent<AudioManager>();
 		uiManager = FindObjectOfType<UIManager>();
+		fartMachine = GetComponent<FartMachine>();
 	}
 
 	protected override void LoadLevelData()

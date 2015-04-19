@@ -130,15 +130,13 @@ public class PlayerCharacter : Character
 	{
 		float fartPower = fartMass;
 
-		// screen shake
-		float shakePower = 1f + fartPower * .3f;
-		Game.Instance.screenShake.Shake(shakePower);
-
+		// create visuals
 		GameObject fartObject = GameObjectFactory.GameObject(fartPrefab, fartLocation.position);
 		Fart fart = fartObject.GetComponent<Fart>();
-		fart.TriggerFart(fartPower);
-
+		fart.TriggerFart(fartPower, lookDirection.Flip());
 		Destroy(fartObject, 3f);
+
+		Game.Instance.fartMachine.Fart(_transform.position, fartPower, lookDirection.Flip());
 	}
 
 	public void SetMovement(Direction newDirection)

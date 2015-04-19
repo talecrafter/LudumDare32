@@ -8,15 +8,32 @@ public class Fart : MonoBehaviour
 {
 	public List<ParticleSystem> particleSystems;
 
-	public void TriggerFart(float power)
+	public ParticleSystem left;
+	public ParticleSystem right;
+
+	public void TriggerFart(float power, Direction direction)
 	{
 		float shakePower = 1f + power * .3f;
 
 		foreach (var item in particleSystems)
 		{
-			item.startSize *= shakePower;
-			item.startSpeed *= shakePower;
-			item.Emit(500);			
+			SpawnFartSmoke(item, shakePower);
 		}
+
+		if (direction == Direction.Left)
+		{
+			SpawnFartSmoke(left, shakePower);
+		}
+		else
+		{
+			SpawnFartSmoke(right, shakePower);
+		}
+	}
+
+	private static void SpawnFartSmoke(ParticleSystem particleSystem, float shakePower)
+	{
+		particleSystem.startSize *= shakePower;
+		particleSystem.startSpeed *= shakePower;
+		particleSystem.Emit(500);
 	}
 }
