@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using CraftingLegends.Core;
 
 public class SecondaryCharacter : Character
 {
@@ -41,6 +42,8 @@ public class SecondaryCharacter : Character
 				return base.currentSpeed;
 		}
 	}
+
+	protected Target _target;
 
 	// ================================================================================
 	//  unity methods
@@ -88,6 +91,16 @@ public class SecondaryCharacter : Character
 	// ================================================================================
 	//  privat methods
 	// --------------------------------------------------------------------------------
+
+	private void TargetRandomFoodTable()
+	{
+		FoodTable table = Game.Instance.fartMachine.foodTables.PickRandom();
+		Vector3 targetPos = table.range.RandomPos();
+
+		Target target = new Target(table, targetPos);
+
+		_target = target;
+	}
 
 	private IEnumerator RunAway(float time)
 	{

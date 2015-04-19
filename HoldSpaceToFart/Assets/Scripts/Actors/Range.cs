@@ -31,6 +31,12 @@ public class Range
 		return Contains(character.transform.position);
 	}
 
+	public Vector3 RandomPos()
+	{
+		float x = Random.Range(left, right);
+		return new Vector3(x, 0, 0);
+	}
+
 	public Vector3 leftPos
 	{
 		get

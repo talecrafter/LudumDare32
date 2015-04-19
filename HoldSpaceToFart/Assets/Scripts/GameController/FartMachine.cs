@@ -15,6 +15,7 @@ public class FartMachine : MonoBehaviour
 	public GameObject visitorPrefab;
 
 	public List<SecondaryCharacter> characters = new List<SecondaryCharacter>();
+	public List<FoodTable> foodTables;
 
 	public Transform leftMarker;
 	public Transform rightMarker;
@@ -22,7 +23,21 @@ public class FartMachine : MonoBehaviour
 
 	void Awake()
 	{
-		StartCoroutine(StartSpawning());
+		StartGameplay();
+	}
+
+	void OnLevelWasLoaded(int levelIndex)
+	{
+		StartGameplay();
+	}
+
+	private void StartGameplay()
+	{
+		if (Application.loadedLevel > 0)
+		{
+			StartCoroutine(StartSpawning());
+			foodTables = new List<FoodTable>(FindObjectsOfType<FoodTable>());
+		}
 	}
 
 	public void Add(SecondaryCharacter secondaryCharacter)

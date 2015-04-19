@@ -131,6 +131,12 @@ public class PlayerCharacter : Character
 		}
 	}
 
+	public void TriggerFart()
+	{
+		fartMass = 3f;
+		Fart();
+	}
+
 	private void Fart()
 	{
 		float fartPower = fartMass;

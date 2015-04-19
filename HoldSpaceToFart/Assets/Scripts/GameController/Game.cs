@@ -54,4 +54,10 @@ public class Game : BaseGameController
 			return levelBounds.xMin + 2.5f;
 		}
 	}
+
+	public void NewGame()
+	{
+		Time.timeScale = 1.0f;
+		StartCoroutine(LoadLevel(1));
+	}
 }

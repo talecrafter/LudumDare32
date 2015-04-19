@@ -11,9 +11,12 @@ namespace CraftingLegends.Framework
 	{
 		void Awake()
 		{
-			CameraSmoothFollow2D camera = FindObjectOfType<CameraSmoothFollow2D>();
-			if (camera != null)
-				camera.target = transform;
+			if (Application.loadedLevel > 0)
+			{
+				CameraSmoothFollow2D camera = FindObjectOfType<CameraSmoothFollow2D>();
+				if (camera != null)
+					camera.target = transform;
+			}
 		}
 	}
 }
