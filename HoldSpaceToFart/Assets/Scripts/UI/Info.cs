@@ -39,7 +39,7 @@ public class Info : MonoBehaviour
 		{
 			timeDisplay.SetActive(true);
 			float progress = Game.Instance.fartMachine.timeProgress;
-			timeImage.fillAmount = 1f - progress;
+			timeImage.fillAmount = progress;
 		}
 		else
 		{

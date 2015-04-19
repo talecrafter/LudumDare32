@@ -45,6 +45,8 @@ public class SecondaryCharacter : Character
 
 	protected Target _target;
 
+	public Transform foodTarget;
+
 	// ================================================================================
 	//  unity methods
 	// --------------------------------------------------------------------------------
@@ -60,6 +62,8 @@ public class SecondaryCharacter : Character
 		SetDepth(Random.Range(fromY, toY));
 
 		Game.Instance.fartMachine.Add(this);
+
+		StartThinking();
 	}
 
 	protected override void Update()
@@ -154,13 +158,28 @@ public class SecondaryCharacter : Character
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(Random.Range(5f, 7f));
+			yield return new WaitForSeconds(Random.Range(3f, 4f));
 
 			if (_target == null)
 			{
 				TargetRandomFoodTable();
 			}
+			else
+			{
+				if (DirectionToTarget() == Direction.None)
+				{
+					Eat();					
+				}
+			}
 		}
+	}
+
+	private void Eat()
+	{
+		Game.Instance.fartMachine.Eat();
+		Game.Instance.gameAudioManager.PlayEatingSound();
+		GameObject food = GameObjectFactory.GameObject(Game.Instance.fartMachine.foodPrefab, foodTarget.position);
+		Destroy(food, 2f);
 	}
 
 	private void SetDepth(float p)
@@ -183,8 +202,15 @@ public class SecondaryCharacter : Character
 	{
 		StopAllCoroutines();
 		Game.Instance.fartMachine.Remove(this);
-		_animationController.FadeOutFast(.5f);
 		Deactivate();
+
+		StartCoroutine(StartLeaving());
+	}
+
+	private IEnumerator StartLeaving()
+	{
+		yield return new WaitForSeconds(0.7f);
+		_animationController.FadeOutFast(.5f);
 		Destroy(gameObject, 0.5f);
 	}
 }

@@ -6,7 +6,7 @@ using CraftingLegends.Framework;
 
 public class Messenger : MonoBehaviour
 {
-	private FadingTimer _timer = new FadingTimer(0.4f, 2.0f, 0.4f);
+	private FadingTimer _timer = new FadingTimer(0.4f, 3.0f, 0.4f);
 
 	private Text[] _text;
 

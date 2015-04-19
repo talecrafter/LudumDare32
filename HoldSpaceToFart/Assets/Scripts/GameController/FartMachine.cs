@@ -33,6 +33,8 @@ public class FartMachine : MonoBehaviour
 	private float maxFood;
 	private float food;
 
+	public GameObject foodPrefab;
+
 	public float foodLeft
 	{
 		get
@@ -163,23 +165,29 @@ public class FartMachine : MonoBehaviour
 
 		currentRound++;
 
-		StartCoroutine(ShowWinning());
-	}
+		Game.Instance.gameAudioManager.PlayRoundWon();
 
-	private IEnumerator ShowWinning()
-	{
-		yield return new WaitForSeconds(.2f);
-
-		Game.Instance.messenger.Message("You have saved enough food");
-
-		yield return new WaitForSeconds(4f);
-
-		StartCoroutine(BeginRound());
+		Game.Instance.messenger.Message("Round won!");
+		StartCoroutine(ShowEndOfRound("You have saved enough food"));
 	}
 
 	public void LoseRound()
 	{
 		EndOfRoundCleanUp();
+
+		Game.Instance.gameAudioManager.PlayRoundLost();
+
+		Game.Instance.messenger.Message("Round lost!");
+		StartCoroutine(ShowEndOfRound("The visitors ate too much food"));
+	}
+
+	private IEnumerator ShowEndOfRound(string message)
+	{
+		//yield return new WaitForSeconds(4f);
+
+		//Game.Instance.messenger.Message(message);
+
+		yield return new WaitForSeconds(2f);
 
 		StartCoroutine(BeginRound());
 	}
@@ -227,8 +235,22 @@ public class FartMachine : MonoBehaviour
 		{
 			foodTables = new List<FoodTable>(FindObjectsOfType<FoodTable>());
 
-			StartCoroutine(BeginRound());
+			StartCoroutine(Intro());
 		}
+	}
+
+	private IEnumerator Intro()
+	{
+		yield return new WaitForSeconds(3f);
+		Game.Instance.messenger.Message("Welcome to the vernissage!");
+		yield return new WaitForSeconds(4f);
+		Game.Instance.messenger.Message("Everything is prepared...");
+		yield return new WaitForSeconds(4f);
+		Game.Instance.messenger.Message("...but the food is not enough.");
+		yield return new WaitForSeconds(4f);
+		Game.Instance.messenger.Message("Hinder the visitors from eating too much.");
+		yield return new WaitForSeconds(4f);
+		StartCoroutine(BeginRound());
 	}
 
 	private IEnumerator BeginRound()
@@ -254,7 +276,7 @@ public class FartMachine : MonoBehaviour
 			return spawnPerRound[round];
 		}
 
-		return spawnPerRound[spawnPerRound.Count - 1] + (round - spawnPerRound.Count);
+		return spawnPerRound[spawnPerRound.Count - 1] + (round - spawnPerRound.Count) * 2;
 	}
 
 	private float GetTimeForRound(int round)
@@ -264,7 +286,7 @@ public class FartMachine : MonoBehaviour
 			return timePerRound[round];
 		}
 
-		return spawnPerRound[timePerRound.Count - 1] + (round - timePerRound.Count);
+		return timePerRound[timePerRound.Count - 1] + (round - timePerRound.Count) * 2;
 	}
 
 	private float GetFoodForRound(int round)

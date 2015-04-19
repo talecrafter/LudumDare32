@@ -1,12 +1,13 @@
 fileFormatVersion: 2
 guid: c9f9e71c1ed289043baf7f2adabdb55e
-timeCreated: 1429355668
+timeCreated: 1429484932
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: table0
     21300002: table1
     21300004: table2
+    21300006: Food
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -81,6 +82,16 @@ TextureImporter:
         height: 557
       alignment: 9
       pivot: {x: .504583955, y: .23707962}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Food
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 712
+        width: 137
+        height: 119
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
