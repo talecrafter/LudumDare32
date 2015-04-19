@@ -4,10 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using CraftingLegends.Core;
+using CraftingLegends.Framework;
 
 public class FartMachine : MonoBehaviour
 {
 	public float scale;
+	public float foodPerBite = 0.1f;
 
 	public List<AudioClip> smallFart;
 	public List<AudioClip> bigFart;
@@ -21,6 +23,46 @@ public class FartMachine : MonoBehaviour
 	public Transform rightMarker;
 	public int maxCount = 10;
 
+	public int startSpawn = 10;
+
+	private int currentRound = 0;
+
+	public FartGameState state = FartGameState.Inbetween;
+	private Timer _roundTimer;
+
+	private float maxFood;
+	private float food;
+
+	public float foodLeft
+	{
+		get
+		{
+			if (food <= 0)
+				return 0;
+
+			return food / maxFood;
+		}
+	}
+
+	public float timeProgress
+	{
+		get
+		{
+			if (_roundTimer == null || _roundTimer.hasEnded)
+				return 1;
+
+			return _roundTimer.progress;
+		}
+	}
+
+	public List<int> spawnPerRound = new List<int>();
+	public List<float> timePerRound = new List<float>();
+	public List<float> foodPerRound = new List<float>();
+
+	// ================================================================================
+	//  unity methods
+	// --------------------------------------------------------------------------------
+
 	void Awake()
 	{
 		StartGameplay();
@@ -31,14 +73,22 @@ public class FartMachine : MonoBehaviour
 		StartGameplay();
 	}
 
-	private void StartGameplay()
+	void Update()
 	{
-		if (Application.loadedLevel > 0)
+		if (state == FartGameState.Running)
 		{
-			StartCoroutine(StartSpawning());
-			foodTables = new List<FoodTable>(FindObjectsOfType<FoodTable>());
+			_roundTimer.Update();
+
+			if (_roundTimer.hasEnded)
+			{
+				WinRound();
+			}
 		}
 	}
+
+	// ================================================================================
+	//  public methods
+	// --------------------------------------------------------------------------------
 
 	public void Add(SecondaryCharacter secondaryCharacter)
 	{
@@ -101,26 +151,142 @@ public class FartMachine : MonoBehaviour
 		GameObject newVisitor = GameObjectFactory.GameObject(visitorPrefab, pos);
 	}
 
-	public void Despawn()
+	public void DespawnRandom()
 	{
 		SecondaryCharacter visitor = characters.PickRandom();
 		visitor.Leave();
+	}
+
+	public void WinRound()
+	{
+		EndOfRoundCleanUp();
+
+		currentRound++;
+
+		StartCoroutine(ShowWinning());
+	}
+
+	private IEnumerator ShowWinning()
+	{
+		yield return new WaitForSeconds(.2f);
+
+		Game.Instance.messenger.Message("You have saved enough food");
+
+		yield return new WaitForSeconds(4f);
+
+		StartCoroutine(BeginRound());
+	}
+
+	public void LoseRound()
+	{
+		EndOfRoundCleanUp();
+
+		StartCoroutine(BeginRound());
+	}
+
+	public void Eat()
+	{
+		if (state == FartGameState.Running)
+		{
+			food -= foodPerBite;
+
+			if (food <= 0)
+			{
+				LoseRound();
+			}
+		}
 	}
 
 	// ================================================================================
 	//  private methods
 	// --------------------------------------------------------------------------------
 
+	private void DespawnAll()
+	{
+		List<SecondaryCharacter> despawnChars = new List<SecondaryCharacter>();
+		foreach (var visitor in characters)
+		{
+			despawnChars.Add(visitor);
+		}
+
+		foreach (var visitor in despawnChars)
+		{
+			visitor.Leave();
+		}
+	}
+
+	private void EndOfRoundCleanUp()
+	{
+		state = FartGameState.Inbetween;
+		DespawnAll();
+	}
+
+	private void StartGameplay()
+	{
+		if (Application.loadedLevel > 0)
+		{
+			foodTables = new List<FoodTable>(FindObjectsOfType<FoodTable>());
+
+			StartCoroutine(BeginRound());
+		}
+	}
+
+	private IEnumerator BeginRound()
+	{
+		yield return new WaitForSeconds(1f);
+
+		Game.Instance.messenger.Message("Difficulty " + (currentRound + 1).ToString());
+		state = FartGameState.Running;
+		_roundTimer = new Timer(GetTimeForRound(currentRound));
+		maxFood = GetFoodForRound(currentRound);
+		food = maxFood;
+
+		for (int i = 0; i < GetSpawnNumberForRound(currentRound); i++)
+		{
+			Spawn();
+		}
+	}
+
+	private int GetSpawnNumberForRound(int round)
+	{
+		if (round < spawnPerRound.Count)
+		{
+			return spawnPerRound[round];
+		}
+
+		return spawnPerRound[spawnPerRound.Count - 1] + (round - spawnPerRound.Count);
+	}
+
+	private float GetTimeForRound(int round)
+	{
+		if (round < timePerRound.Count)
+		{
+			return timePerRound[round];
+		}
+
+		return spawnPerRound[timePerRound.Count - 1] + (round - timePerRound.Count);
+	}
+
+	private float GetFoodForRound(int round)
+	{
+		if (round < foodPerRound.Count)
+		{
+			return foodPerRound[round];
+		}
+
+		return foodPerRound[foodPerRound.Count - 1];
+	}
+
 	private IEnumerator StartSpawning()
 	{
 		while (true)
 		{
+			yield return new WaitForSeconds(5f);
+
 			if (characters.Count < maxCount)
 			{
 				Spawn();
 			}
-
-			yield return new WaitForSeconds(5f);
 		}
 	}
 }

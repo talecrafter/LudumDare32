@@ -22,7 +22,7 @@ public class FartMachineEditor : Editor
 		if (GUILayout.Button("Remove", GUILayout.Height(40f)))
 		{
 			if (Application.isPlaying)
-				machine.Despawn();
+				machine.DespawnRandom();
 		}
 	}
 }

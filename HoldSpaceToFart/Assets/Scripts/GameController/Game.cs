@@ -16,6 +16,7 @@ public class Game : BaseGameController
 	public PlayerCharacter playerCharacter;
 
 	public FartMachine fartMachine;
+	public Messenger messenger;
 
 	void Awake()
 	{
@@ -30,6 +31,7 @@ public class Game : BaseGameController
 		gameAudioManager = GetComponent<AudioManager>();
 		uiManager = FindObjectOfType<UIManager>();
 		fartMachine = GetComponent<FartMachine>();
+		messenger = GetComponent<Messenger>();
 	}
 
 	protected override void LoadLevelData()

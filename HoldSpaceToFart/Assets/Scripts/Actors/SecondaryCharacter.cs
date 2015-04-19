@@ -55,6 +55,7 @@ public class SecondaryCharacter : Character
 
 		SetRandomSize();
 		SetRandomSpeed();
+		SetDirection(DirectionStatic.GetRandom());
 
 		SetDepth(Random.Range(fromY, toY));
 
@@ -63,6 +64,11 @@ public class SecondaryCharacter : Character
 
 	protected override void Update()
 	{
+		if (!_isRunning && _target != null)
+		{
+			SetDirection(DirectionToTarget());
+		}
+
 		if (outOfRightBorder)
 		{
 			SetDirection(Direction.Left);
@@ -102,11 +108,59 @@ public class SecondaryCharacter : Character
 		_target = target;
 	}
 
+	private Direction DirectionToTarget()
+	{
+		if (_target == null)
+		{
+			return Direction.None;
+		}
+
+		float targetDistance = 0.3f;
+		if (_target.targetPos.x > _transform.position.x + targetDistance)
+			return Direction.Right;
+		else if (_target.targetPos.x < _transform.position.x - targetDistance)
+			return Direction.Left;
+		else
+		{
+			return Direction.None;
+		}
+	}
+
 	private IEnumerator RunAway(float time)
 	{
-		isRunning = true;
+		StartRunning();
 		yield return new WaitForSeconds(time);
+		StopRunning();
+	}
+
+	private void StartRunning()
+	{
+		isRunning = true;
+		_target = null;
+	}
+
+	private void StopRunning()
+	{
 		isRunning = false;
+		StartThinking();
+	}
+
+	private void StartThinking()
+	{
+		StartCoroutine(Thinking());
+	}
+
+	private IEnumerator Thinking()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(Random.Range(5f, 7f));
+
+			if (_target == null)
+			{
+				TargetRandomFoodTable();
+			}
+		}
 	}
 
 	private void SetDepth(float p)
