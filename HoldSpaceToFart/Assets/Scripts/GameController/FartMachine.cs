@@ -12,10 +12,18 @@ public class FartMachine : MonoBehaviour
 	public List<AudioClip> smallFart;
 	public List<AudioClip> bigFart;
 
+	public GameObject visitorPrefab;
+
 	public List<SecondaryCharacter> characters = new List<SecondaryCharacter>();
 
 	public Transform leftMarker;
 	public Transform rightMarker;
+	public int maxCount = 10;
+
+	void Awake()
+	{
+		StartCoroutine(StartSpawning());
+	}
 
 	public void Add(SecondaryCharacter secondaryCharacter)
 	{
@@ -62,6 +70,30 @@ public class FartMachine : MonoBehaviour
 			{
 				character.SenseFart(range.pivot, power);
 			}
+		}
+	}
+
+	public void Spawn()
+	{
+		float posX = Random.Range(Game.Instance.borderLeft, Game.Instance.borderRight);
+		Vector3 pos = new Vector3(posX, 0, 0);
+		GameObject newVisitor = GameObjectFactory.GameObject(visitorPrefab, pos);
+	}
+
+	// ================================================================================
+	//  private methods
+	// --------------------------------------------------------------------------------
+
+	private IEnumerator StartSpawning()
+	{
+		while (true)
+		{
+			if (characters.Count < maxCount)
+			{
+				Spawn();
+			}
+
+			yield return new WaitForSeconds(5f);
 		}
 	}
 }

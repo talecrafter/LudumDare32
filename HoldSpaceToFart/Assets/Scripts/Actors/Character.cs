@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using CraftingLegends.Framework;
 
 public class Character : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Character : MonoBehaviour
 	protected GameObject _displayObject;
 
 	protected Animator _animator;
+	protected AnimationController _animationController;
 	protected Transform _transform;
 
 	protected virtual float currentSpeed
@@ -73,6 +75,9 @@ public class Character : MonoBehaviour
 		_transform = transform;
 		_startSpeed = speed;
 		_animator = GetComponentInChildren<Animator>();
+		_animationController = GetComponent<AnimationController>();
+
+		_animationController.FadeIn();
 	}
 
 	protected virtual void Update()

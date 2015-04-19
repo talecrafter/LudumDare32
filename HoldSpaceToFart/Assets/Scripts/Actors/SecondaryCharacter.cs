@@ -9,6 +9,39 @@ public class SecondaryCharacter : Character
 	public float fromY;
 	public float toY;
 
+	private bool _isRunning = false;
+	private bool isRunning
+	{
+		get
+		{
+			return _isRunning;
+		}
+		set
+		{
+			_isRunning = value;
+
+			if (_isRunning)
+			{
+				_animator.speed = 1.5f;
+			}
+			else
+			{
+				_animator.speed = 1f;
+			}
+		}
+	}
+
+	protected override float currentSpeed
+	{
+		get
+		{
+			if (_isRunning)
+				return base.currentSpeed * 2f;
+			else
+				return base.currentSpeed;
+		}
+	}
+
 	// ================================================================================
 	//  unity methods
 	// --------------------------------------------------------------------------------
@@ -47,11 +80,21 @@ public class SecondaryCharacter : Character
 	{
 		GetComponent<RandomTalker>().SenseFart();
 		MoveAwayFromPos(pos);
+
+		StopAllCoroutines();
+		StartCoroutine(RunAway(power));
 	}
 
 	// ================================================================================
 	//  privat methods
 	// --------------------------------------------------------------------------------
+
+	private IEnumerator RunAway(float time)
+	{
+		isRunning = true;
+		yield return new WaitForSeconds(time);
+		isRunning = false;
+	}
 
 	private void SetDepth(float p)
 	{
