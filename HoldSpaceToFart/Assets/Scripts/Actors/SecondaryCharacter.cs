@@ -111,4 +111,13 @@ public class SecondaryCharacter : Character
 		float variation = Random.Range(0.8f, 1.2f);
 		speed = variation * _startSpeed;
 	}
+
+	public void Leave()
+	{
+		StopAllCoroutines();
+		Game.Instance.fartMachine.Remove(this);
+		_animationController.FadeOutFast(.5f);
+		Deactivate();
+		Destroy(gameObject, 0.5f);
+	}
 }

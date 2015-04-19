@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
 	protected AnimationController _animationController;
 	protected Transform _transform;
 
+	private bool _isActive = true;
+
 	protected virtual float currentSpeed
 	{
 		get
@@ -82,18 +84,27 @@ public class Character : MonoBehaviour
 
 	protected virtual void Update()
 	{
-		AutomaticMovement();
-
-		HoldInBounds();
-
-		if (current == Direction.Left || current == Direction.Right)
+		if (_isActive)
 		{
-			_animator.SetInteger("state", 1);
+			AutomaticMovement();
+
+			HoldInBounds();
+
+			if (current == Direction.Left || current == Direction.Right)
+			{
+				_animator.SetInteger("state", 1);
+			}
+			else
+			{
+				_animator.SetInteger("state", 0);
+			}
 		}
-		else
-		{
-			_animator.SetInteger("state", 0);
-		}
+	}
+
+	protected void Deactivate()
+	{
+		_isActive = false;
+		_animator.SetInteger("state", 0);
 	}
 
 	// ================================================================================

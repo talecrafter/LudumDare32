@@ -12,13 +12,17 @@ public class FartMachineEditor : Editor
 	{
 		DrawDefaultInspector();
 
-		if (Application.isPlaying)
+		FartMachine machine = target as FartMachine;
+
+		if (GUILayout.Button("Add", GUILayout.Height(40f)))
 		{
-			if (GUILayout.Button("Spawn", GUILayout.Height(40f)))
-			{
-				FartMachine machine = target as FartMachine;
+			if (Application.isPlaying)
 				machine.Spawn();
-			}
+		}
+		if (GUILayout.Button("Remove", GUILayout.Height(40f)))
+		{
+			if (Application.isPlaying)
+				machine.Despawn();
 		}
 	}
 }

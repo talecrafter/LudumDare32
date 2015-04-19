@@ -31,6 +31,12 @@ public class FartMachine : MonoBehaviour
 			characters.Add(secondaryCharacter);
 	}
 
+	public void Remove(SecondaryCharacter secondaryCharacter)
+	{
+		if (characters.Contains(secondaryCharacter))
+			characters.Remove(secondaryCharacter);
+	}
+
 	public void Fart(Vector3 pos, float power, Direction direction)
 	{
 		// play audio
@@ -78,6 +84,12 @@ public class FartMachine : MonoBehaviour
 		float posX = Random.Range(Game.Instance.borderLeft, Game.Instance.borderRight);
 		Vector3 pos = new Vector3(posX, 0, 0);
 		GameObject newVisitor = GameObjectFactory.GameObject(visitorPrefab, pos);
+	}
+
+	public void Despawn()
+	{
+		SecondaryCharacter visitor = characters.PickRandom();
+		visitor.Leave();
 	}
 
 	// ================================================================================
