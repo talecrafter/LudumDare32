@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
 	[SerializeField]
 	protected GameObject _displayObject;
 
-	private Animator _animator;
+	protected Animator _animator;
 	protected Transform _transform;
 
 	protected virtual float currentSpeed
@@ -80,6 +80,15 @@ public class Character : MonoBehaviour
 		AutomaticMovement();
 
 		HoldInBounds();
+
+		if (current == Direction.Left || current == Direction.Right)
+		{
+			_animator.SetInteger("state", 1);
+		}
+		else
+		{
+			_animator.SetInteger("state", 0);
+		}
 	}
 
 	// ================================================================================

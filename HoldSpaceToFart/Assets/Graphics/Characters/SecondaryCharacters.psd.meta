@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a9df9d019c6411746b36f536f9512156
-timeCreated: 1429381543
+timeCreated: 1429451720
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -69,62 +69,42 @@ TextureImporter:
     - name: woman0
       rect:
         serializedVersion: 2
-        x: 465
+        x: 467
         y: 1139
-        width: 363
+        width: 297
         height: 850
       alignment: 9
-      pivot: {x: .512413323, y: .0732503757}
+      pivot: {x: .613802016, y: .0753343254}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: woman1
       rect:
         serializedVersion: 2
-        x: 913
-        y: 1152
-        width: 345
+        x: 787
+        y: 1163
+        width: 294
         height: 759
       alignment: 9
-      pivot: {x: .543465495, y: .0720053986}
+      pivot: {x: .477191746, y: .0673379377}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: woman2
       rect:
         serializedVersion: 2
-        x: 1289
-        y: 1173
+        x: 1089
+        y: 1157
         width: 309
         height: 738
       alignment: 9
-      pivot: {x: .5, y: .0542794429}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: woman3
-      rect:
-        serializedVersion: 2
-        x: 27
-        y: 248
-        width: 312
-        height: 854
-      alignment: 9
-      pivot: {x: .550324678, y: .0963548943}
+      pivot: {x: .5, y: .0710804835}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: man1
       rect:
         serializedVersion: 2
-        x: 355
-        y: 233
-        width: 290
-        height: 861
+        x: 1470
+        y: 1078
+        width: 309
+        height: 943
       alignment: 9
-      pivot: {x: .501465917, y: .109201819}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: man2
-      rect:
-        serializedVersion: 2
-        x: 748
-        y: 199
-        width: 407
-        height: 901
-      alignment: 9
-      pivot: {x: .614392757, y: .0953479558}
+      pivot: {x: .5, y: .11680951}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

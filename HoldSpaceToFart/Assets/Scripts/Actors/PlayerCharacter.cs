@@ -84,9 +84,12 @@ public class PlayerCharacter : Character
 				StopFarting();
 			}
 		}
-		_lastInputWasFarting = false;
+		else
+		{
+			base.Update();
+		}
 
-		base.Update();
+		_lastInputWasFarting = false;
 	}
 
 	private void UpdateFarting()
@@ -114,6 +117,8 @@ public class PlayerCharacter : Character
 	{
 		isFarting = true;
 		fartMass = 0;
+
+		_animator.SetInteger("state", 2);
 	}
 
 	private void StopFarting()
