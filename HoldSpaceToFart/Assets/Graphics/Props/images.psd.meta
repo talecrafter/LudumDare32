@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: e3a5ea8c62b8f7f41a64d17cb6c20840
-timeCreated: 1429355596
+timeCreated: 1429449844
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: image0
+    21300002: image1
+    21300004: image2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,6 +59,26 @@ TextureImporter:
         y: 1247
         width: 1138
         height: 786
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: image1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 421
+        width: 1138
+        height: 786
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: image2
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1231
+        width: 615
+        height: 790
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
